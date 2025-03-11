@@ -4,15 +4,15 @@ export const Home = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative px-4 pt-20 overflow-hidden">
       <RevealOnScroll>
-        <div className="text-center z-10 px-4 flex flex-col items-center gap-15">
+        <div className="text-center z-10 px-4 flex flex-col items-center gap-10">
 
-          <div className="flex flex-col md:flex-row items-center justify-center text-center md:text-left px-6 md:px-16 gap-12 w-full max-w-5xl gap-30">
+          <div className="flex flex-col md:flex-row items-center justify-center text-center md:text-left px-6 md:px-16 w-full max-w-5xl gap-30">
             {/* Profile Picture */}
             <div className="flex justify-center items-center flex-shrink-0">
               <img 
                 src="./images/profile.jpg" 
                 alt="Abhay Biradar" 
-                className="w-24 h-24 md:w-80 md:h-80 rounded-full border-4 border-blue-500 shadow-lg"
+                className="w-24 h-24 md:w-100 md:h-100 rounded-full border-4 border-blue-500 shadow-lg"
               />
             </div>
 
@@ -37,7 +37,7 @@ export const Home = () => {
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-center space-x-6 mt-6 mr-30">
+          <div className="flex justify-center space-x-6 mt-6 ">
             <a
               href="#projects"
               className="bg-blue-500 text-white py-3 px-6 rounded font-medium transition hover:-translate-y-0.5 hover:shadow-lg"

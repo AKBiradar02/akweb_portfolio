@@ -10,6 +10,7 @@ export const About = () => {
   ];
 
   const backendSkills = ["Flask", "Python", "AWS", "RestAPI", "GraphQL", "SQLite"];
+  const dataSkills = ["SQL", "Python", "Numpy", "Pandas", "PowerBI", "Excel", "Analysis", "EDA", "ETL"];
 
   return (
     <section
@@ -23,13 +24,17 @@ export const About = () => {
             About Me
           </h2>
 
-          <div className="rounded-xl p-8 border-white/10 border hover:-translate-y-1 transition-all">
-            <p className="text-gray-300 mb-6">
-              Passionate developer with expertise in building scalable web
-              applications and creating innovative solutions.
+          <div className="rounded-xl p-5 border-white/40 border hover:-translate-y-1 transition-all">
+            <p className="text-gray-300 mb-6 text-center">
+              I am a passionate and detail-oriented developer with a strong analytical mindset and a drive for continuous learning. 
+              I thrive on solving complex problems and enjoy bridging the gap between data and technology. 
+              With a keen eye for efficiency and innovation, I approach challenges with a structured yet creative perspective,
+              always looking for ways to improve and optimize. My ability to adapt to new technologies, 
+              combined with my dedication to quality and precision, makes me a valuable asset in any technical environment.
+               Beyond coding, I value collaboration and enjoy sharing knowledge, always seeking to grow both personally and professionally.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="rounded-xl p-6 hover:-translate-y-1 transition-all">
                 <h3 className="text-xl font-bold mb-4"> Frontend</h3>
                 <div className="flex flex-wrap gap-2">
@@ -50,6 +55,22 @@ export const About = () => {
                 <h3 className="text-xl font-bold mb-4"> Backend</h3>
                 <div className="flex flex-wrap gap-2">
                   {backendSkills.map((tech, key) => (
+                    <span
+                      key={key}
+                      className="bg-blue-500/10 text-blue-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 
+                                    hover:shadow-[0_2px_8px_rgba(59,130,2246,0.2)] transition
+                    "
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-xl p-6 hover:-translate-y-1 transition-all">
+                <h3 className="text-xl font-bold mb-4"> Data Analytics</h3>
+                <div className="flex flex-wrap gap-2">
+                  {dataSkills.map((tech, key) => (
                     <span
                       key={key}
                       className="bg-blue-500/10 text-blue-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 
