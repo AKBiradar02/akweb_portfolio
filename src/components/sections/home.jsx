@@ -12,7 +12,7 @@ export const Home = () => {
               <img 
                 src="./images/profile.jpg" 
                 alt="Abhay Biradar" 
-                className="w-24 h-24 md:w-100 md:h-100 rounded-full border-4 border-blue-500 shadow-lg"
+                className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md rounded-lg object-cover border-4 border-blue-500 shadow-lg"
               />
             </div>
 
