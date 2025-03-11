@@ -2,19 +2,18 @@ import { RevealOnScroll } from "../RevealOnScroll";
 
 export const Home = () => {
   return (
-    <section
-      id="home"
-      className="min-h-screen flex items-center justify-center relative "
-
-    >
+    <section id="home" className="min-h-screen flex items-center justify-center relative px-4">
       <RevealOnScroll>
-        <div className="text-center z-10 px-4 flex flex-col items-center">
+        <div className="text-center z-10 px-5 flex flex-col items-center gap-15">
 
-          <div className="flex flex-col md:flex-row items-center justify-end md:items-start text-center md:text-left px-6 md:px-16 gap-50">
+          <div className="flex flex-col md:flex-row items-center justify-center text-center md:text-left px-6 md:px-16 gap-12 w-full max-w-5xl gap-30">
             {/* Profile Picture */}
-            <div>
-              <img src="/images/profile.jpg" alt="Abhay Biradar" 
-              className=" w-24 h-24 md:w-70 md:h-90 rounded-full border-4 border-blue-500 shadow-lg" />
+            <div className="flex justify-center items-center flex-shrink-0">
+              <img
+                src="./images/profile.jpg"
+                alt="Abhay Biradar"
+                className="w-24 h-24 md:w-80 md:h-80 rounded-full border-4 border-blue-500 shadow-lg"
+              />
             </div>
 
             {/* Text Content */}
@@ -38,7 +37,7 @@ export const Home = () => {
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-center space-x-6 ml-70 ">
+          <div className="flex justify-center space-x-6 mt-6">
             <a
               href="#projects"
               className="bg-blue-500 text-white py-3 px-6 rounded font-medium transition hover:-translate-y-0.5 hover:shadow-lg"
@@ -48,7 +47,7 @@ export const Home = () => {
 
             <a
               href="#contact"
-              className="border border-blue-500/50 text-blue-500 py-3 px-6  rounded font-medium transition hover:-translate-y-0.5 hover:bg-blue-500/10"
+              className="border border-blue-500/50 text-blue-500 py-3 px-6 rounded font-medium transition hover:-translate-y-0.5 hover:bg-blue-500/10"
             >
               Contact Me
             </a>
