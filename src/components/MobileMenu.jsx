@@ -1,12 +1,14 @@
 import { useEffect } from "react";
+import { FaInstagram, FaXTwitter, FaGithub } from "react-icons/fa6";
+import { SiHackerrank, SiLeetcode } from "react-icons/si";
 
 export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-screen bg-[rgba(10,10,10,0.9)] z-40 flex flex-col items-center justify-center 
+      className={`fixed top-16 left-0 w-full bg-[rgba(10,10,10,0.9)] backdrop-blur-lg z-40 flex flex-col items-center justify-center
                   transition-all duration-300 ease-in-out
-                  ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
-                 `}
+                  ${menuOpen ? "h-screen opacity-100 pointer-events-auto" : "h-0 opacity-0 pointer-events-none"}
+                `}
     >
       {/* Close Button */}
       <button
@@ -17,27 +19,56 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
         &times;
       </button>
 
-      {/* Menu Links */}
-      <nav className="flex flex-col items-center space-y-6">
-        {[
-          { label: "Home", href: "#home" },
-          { label: "About", href: "#about" },
-          { label: "Projects", href: "#projects" },
-          { label: "Contact", href: "#contact" },
-        ].map((item, index) => (
-          <a
-            key={item.href}
-            href={item.href}
-            onClick={() => setMenuOpen(false)}
-            className={`text-2xl font-semibold text-white transition-all duration-300 transform 
-                        ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}
-                      `}
-            style={{ transitionDelay: `${index * 100}ms` }} // Staggered effect
-          >
-            {item.label}
-          </a>
-        ))}
-      </nav>
+      {/* Menu Items */}
+      <div className="flex flex-col items-center space-y-6 mt-10">
+        <a
+          href="#home"
+          onClick={() => setMenuOpen(false)}
+          className="text-2xl font-semibold text-white transition-transform duration-300"
+        >
+          Home
+        </a>
+        <a
+          href="#about"
+          onClick={() => setMenuOpen(false)}
+          className="text-2xl font-semibold text-white transition-transform duration-300"
+        >
+          About
+        </a>
+        <a
+          href="#projects"
+          onClick={() => setMenuOpen(false)}
+          className="text-2xl font-semibold text-white transition-transform duration-300"
+        >
+          Projects
+        </a>
+        <a
+          href="#contact"
+          onClick={() => setMenuOpen(false)}
+          className="text-2xl font-semibold text-white transition-transform duration-300"
+        >
+          Contact
+        </a>
+      </div>
+
+      {/* Social Media Icons */}
+      <div className="flex items-center space-x-6 mt-10">
+        <a href="https://www.instagram.com/abhay.kb.02/" target="_blank" rel="noopener noreferrer">
+          <FaInstagram className="text-gray-300 hover:text-white text-3xl" />
+        </a>
+        <a href="https://x.com/abhaybiradar02" target="_blank" rel="noopener noreferrer">
+          <FaXTwitter className="text-gray-300 hover:text-white text-3xl" />
+        </a>
+        <a href="https://github.com/AKBiradar02" target="_blank" rel="noopener noreferrer">
+          <FaGithub className="text-gray-300 hover:text-white text-3xl" />
+        </a>
+        <a href="https://www.hackerrank.com/profile/h1032211780" target="_blank" rel="noopener noreferrer">
+          <SiHackerrank className="text-gray-300 hover:text-white text-3xl" />
+        </a>
+        <a href="https://leetcode.com/u/AKBiradar02/" target="_blank" rel="noopener noreferrer">
+          <SiLeetcode className="text-gray-300 hover:text-white text-3xl" />
+        </a>
+      </div>
     </div>
   );
 };

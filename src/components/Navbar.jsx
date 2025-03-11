@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FaInstagram, FaXTwitter, FaGithub } from "react-icons/fa6";
+import { FaInstagram, FaXTwitter, FaGithub, FaBars } from "react-icons/fa6";
 import { SiHackerrank, SiLeetcode } from "react-icons/si";
 
 export const Navbar = ({ menuOpen, setMenuOpen }) => {
@@ -11,18 +11,11 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
         <nav className="fixed top-0 w-full z-40 bg-[rgb(10,10,10,0.8)] backdrop-blur-lg border-b border-white/10 shadow-lg">
             <div className="max-w-5xl mx-auto px-4">
                 <div className="flex justify-between items-center h-16">
+
                     {/* Logo on the Left */}
-                    <a href="#home" className="absolute left-25 font-mono text-xl font-bold text-white">
+                    <a href="#home" className="font-mono text-xl font-bold text-white pl-6">
                         Tech<span className="text-blue-500">.Bytes</span>
                     </a>
-
-                    {/* Mobile Menu Button */}
-                    <div
-                        className="w-7 h-5 relative cursor-pointer z-40 md:hidden"
-                        onClick={() => setMenuOpen((prev) => !prev)}
-                    >
-                        &#9776;
-                    </div>
 
                     {/* Centered Navbar Links */}
                     <div className="hidden md:flex items-center space-x-10 justify-center w-full">
@@ -32,8 +25,8 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
                         <a href="#contact" className="text-gray-300 hover:text-white transition-colors">Contact</a>
                     </div>
 
-                    {/* Social Media Icons on the Right */}
-                    <div className="hidden absolute right-25 md:flex items-center space-x-8 ml-auto">
+                    {/* Social Media Icons */}
+                    <div className="hidden md:flex items-center space-x-6 pr-6">
                         <a href="https://www.instagram.com/abhay.kb.02/" target="_blank" rel="noopener noreferrer">
                             <FaInstagram className="text-gray-300 hover:text-white text-2xl" />
                         </a>
@@ -50,6 +43,15 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
                             <SiLeetcode className="text-gray-300 hover:text-white text-2xl" />
                         </a>
                     </div>
+
+                    {/* Mobile Menu Button */}
+                    <button
+                        className="md:hidden text-white text-3xl pr-6"
+                        onClick={() => setMenuOpen((prev) => !prev)}
+                        aria-label="Toggle Menu"
+                    >
+                        <FaBars />
+                    </button>
                 </div>
             </div>
         </nav>
