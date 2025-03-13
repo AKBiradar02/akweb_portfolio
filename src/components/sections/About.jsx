@@ -18,14 +18,14 @@ export const About = () => {
       className="min-h-screen flex items-center justify-center py-20"
     >
       <RevealOnScroll>
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
+        <div className="max-w-3xl mx-auto px-4 ">
+          <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-cyan-500 to-red-200 bg-clip-text text-transparent text-center">
             {" "}
             About Me
           </h2>
 
-          <div className="rounded-xl p-5 border-white/40 border hover:-translate-y-1 transition-all">
-            <p className="text-gray-300 mb-6 text-center">
+          <div className="rounded-xl p-5 border-white/40 border backdrop-blur-sm hover:-translate-y-1 transition-all">
+            <p className="text-gray-100 mb-6 text-center">
               I am a passionate and detail-oriented developer with a strong analytical mindset and a drive for continuous learning. 
               I thrive on solving complex problems and enjoy bridging the gap between data and technology. 
               With a keen eye for efficiency and innovation, I approach challenges with a structured yet creative perspective,
@@ -41,7 +41,7 @@ export const About = () => {
                   {frontendSkills.map((tech, key) => (
                     <span
                       key={key}
-                      className="bg-blue-500/10 text-blue-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 
+                      className="bg-blue-500/10 text-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 
                                     hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition
                     "
                     >
@@ -57,7 +57,7 @@ export const About = () => {
                   {backendSkills.map((tech, key) => (
                     <span
                       key={key}
-                      className="bg-blue-500/10 text-blue-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 
+                      className="bg-blue-500/10 text-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 
                                     hover:shadow-[0_2px_8px_rgba(59,130,2246,0.2)] transition
                     "
                     >
@@ -73,7 +73,7 @@ export const About = () => {
                   {dataSkills.map((tech, key) => (
                     <span
                       key={key}
-                      className="bg-blue-500/10 text-blue-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 
+                      className="bg-blue-500/10 text-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 
                                     hover:shadow-[0_2px_8px_rgba(59,130,2246,0.2)] transition
                     "
                     >
@@ -85,10 +85,10 @@ export const About = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 backdrop-blur-sm gap-6 mt-8">
             <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
               <h3 className="text-xl font-bold mb-4"> 🏫 Education </h3>
-              <ul className="list-disc list-inside text-gray-300 space-y-2">
+              <ul className="list-disc list-inside text-cyan-50 space-y-2">
                 <li>
                   <strong> B.Tech in Electrical and Computer Engineering </strong> - MIT World Peace University,Pune
                   (2021-2025)
@@ -111,7 +111,7 @@ export const About = () => {
 
             <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
               <h3 className="text-xl font-bold mb-4"> 💼 Work Experience </h3>
-              <div className="space-y-4 text-gray-300">
+              <div className="space-y-4 text-cyan-50">
                 <div>
                   <h4 className="font-semibold">
                     {" "}
