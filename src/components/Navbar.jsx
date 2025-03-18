@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FaInstagram, FaXTwitter, FaGithub, FaBars } from "react-icons/fa6";
+import { FaInstagram, FaXTwitter, FaGithub, FaBars, FaLinkedinIn } from "react-icons/fa6";
 import { SiHackerrank, SiLeetcode } from "react-icons/si";
 
 export const Navbar = ({ menuOpen, setMenuOpen }) => {
@@ -13,8 +13,8 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
                 <div className="flex justify-between items-center h-16">
 
                     {/* Logo on the Left */}
-                    <a href="#home" className="font-mono text-xl font-bold text-white pl-6">
-                        Tech<span className="text-cyan-500">.Bytes</span>
+                    <a href="https://www.instagram.com/fintech__bites__/" className="font-mono text-xl font-bold text-white pl-6">
+                        FinTech__<span className="text-cyan-500">Bytes__</span>
                     </a>
 
                     {/* Centered Navbar Links */}
@@ -29,6 +29,9 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
                     <div className="hidden md:flex items-center space-x-6 pr-6">
                         <a href="https://www.instagram.com/abhay.kb.02/" target="_blank" rel="noopener noreferrer">
                             <FaInstagram className="text-red-200 hover:text-white text-2xl" />
+                        </a>
+                        <a href="https://www.linkedin.com/in/abhay-biradar-aa05301b7/" target="_blank" rel="noopener noreferrer">
+                            <FaLinkedinIn className="text-red-200 hover:text-white text-2xl" />
                         </a>
                         <a href="https://x.com/abhaybiradar02" target="_blank" rel="noopener noreferrer">
                             <FaXTwitter className="text-red-200 hover:text-white text-2xl" />

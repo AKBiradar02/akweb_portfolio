@@ -91,6 +91,19 @@ export const Contact = () => {
             </button>
           </form>
         </div>
+
+        <footer class="mt-15 text-white text-xl p-6 text-center">
+          <p>© 2025 <a href="https://www.instagram.com/fintech__bites__/" class="text-cyan-400 hover:underline">fintech__bites__</a></p>
+          <div class="flex justify-center space-x-4 mt-2">
+            
+              <a href="https://www.instagram.com/abhay.kb.02/" class="text-gray-300 hover:text-blue-400">Instagram</a>
+              <a href="https://x.com/abhaybiradar02" class="text-gray-300 hover:text-blue-400">Twitter</a>
+              <a href="https://www.linkedin.com/in/abhay-biradar-aa05301b7/" class="text-gray-300 hover:text-blue-400">LinkedIn</a>
+            
+          </div>
+
+
+        </footer>
       </RevealOnScroll>
     </section>
   );
