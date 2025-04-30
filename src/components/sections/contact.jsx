@@ -92,7 +92,7 @@ export const Contact = () => {
           </form>
         </div>
 
-        <footer class="mt-15 text-white text-xl p-6 text-center">
+        <footer class="mt-20 text-white text-xl p-6 text-center">
           <p>© 2025 <a href="https://www.instagram.com/fintech__bites__/" class="text-cyan-400 hover:underline">fintech__bites__</a></p>
           <div class="flex justify-center space-x-4 mt-2">
             
