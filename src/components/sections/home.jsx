@@ -9,11 +9,11 @@ export const Home = () => {
           <div className="flex flex-col md:flex-row items-center justify-center text-center md:text-right px-6 md:px-16 w-full max-w-5xl gap-10">
 
             {/* Profile Picture */}
-            <div className="flex justify-center items-center flex-shrink-0">
+            <div className="flex justify-center items-center pb-5 flex-shrink-0">
               <img
-                src="./images/profile.jpg"
+                src="./images/akb_removed.png"
                 alt="Abhay Biradar"
-                className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md rounded-lg object-cover border-4 border-cyan-400 shadow-lg"
+                className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md rounded- object-cover shadow-lg"
               />
             </div>
 
@@ -25,7 +25,7 @@ export const Home = () => {
 
               <p className="text-gray text-xl font-semibold">Developer Analyst</p>
 
-              <p className="text-gray text-justify text-lg mt-4 leading-relaxed">
+              <p className="text-gray text-left text-lg mt-4 leading-relaxed">
                 As a Data Developer, I bridge the gap between data insights and software solutions.
                 I'm passionate about building data-driven applications that solve real-world problems.
                 Let's transform data into action together!
