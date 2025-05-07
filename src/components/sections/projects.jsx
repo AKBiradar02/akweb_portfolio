@@ -133,10 +133,10 @@ export const Projects = () => {
             >
               <h3 className="text-xl font-bold mb-2">Stock_Market_Analysis</h3>
               <p className="text-cyan-50 mb-4">
-                
-                This data set consists of a number of companies’ stock data from 2000-2021 including Adani Ports, Bajaj Finance, Wipro, Infosys, and many more. 
+
+                This data set consists of a number of companies’ stock data from 2000-2021 including Adani Ports, Bajaj Finance, Wipro, Infosys, and many more.
                 But for this project, we will be analyzing three Tata stocks - Tata Motors, Tata Steel, and Tata Consultancy Services (TCS)
-                
+
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {["Jupyter Notebook", "Python", "Pandas", "Numpy", "Matplotlib", "Analytics"].map(
@@ -213,10 +213,50 @@ export const Projects = () => {
               transition-all
             "
             >
+              <h3 className="text-xl font-bold mb-2">Affilistore</h3>
+              <p className="text-cyan-50 mb-4">
+                This is a simple e-commerce website template built using React and Tailwind CSS.
+                It includes a homepage, product listing page, and product detail page.
+                The template is fully responsive and can be easily customized to fit your needs.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {["FireBase", "Vite", "ReactJS", "TailwindCSS"].map((tech, key) => (
+                  <span
+                    key={key}
+                    className="
+                      bg-cyan-500/10 text-cyan-500 py-1 px-3 
+                      rounded-full text-sm
+                      transition
+                      hover:bg-cyan-500/20 hover:-translate-y-0.5
+                      hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]
+                    "
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="flex justify-between items-center ">
+                <a
+                  href="https://github.com/AKBiradar02/affliate_ecom"
+                  className="text-cyan-150 hover:text-red-300 transition-colors my-4"
+                >
+                  View Project →
+                </a>
+              </div>
+            </div>
+
+            <div
+              className="
+              glass p-6 rounded-xl border border-white/30 
+              hover:-translate-y-1 hover:border-cyan-500/30
+              hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)]
+              transition-all
+            "
+            >
               <h3 className="text-xl font-bold mb-2">Brand-Page</h3>
               <p className="text-cyan-50 mb-4">
-              Brand-Page of Nike for the learning of React And usability of Vite.
-              This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+                Brand-Page of Nike for the learning of React And usability of Vite.
+                This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {["React", "TailwindCSS", "Vite", "JavaScript"].map((tech, key) => (
