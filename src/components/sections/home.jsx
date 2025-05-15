@@ -1,6 +1,13 @@
+import { useEffect } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 
 export const Home = () => {
+  
+  const something = () => {}
+  
+  useEffect(()=>{
+     something();
+  },[])
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative px-4 pt-20 overflow-hidden">
       <RevealOnScroll>
@@ -13,7 +20,7 @@ export const Home = () => {
               <img
                 src="./images/akb_removed.png"
                 alt="Abhay Biradar"
-                className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md rounded- object-cover shadow-lg"
+                className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md rounded-full rounded- object-cover shadow-lg"
               />
             </div>
 

@@ -76,6 +76,7 @@ export const Projects = () => {
               <div className="flex justify-between items-center ">
                 <a
                   href="https://github.com/AKBiradar02/akweb_portfolio"
+                  target="_blank"
                   className="text-red-150 hover:text-red-300 transition-colors my-4"
                 >
                   View Project →

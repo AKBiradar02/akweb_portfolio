@@ -27,7 +27,7 @@ export const Contact = () => {
   };
 
   return (
-    <section
+    <><section
       id="contact"
       className="min-h-screen flex items-center justify-center py-20"
     >
@@ -47,10 +47,7 @@ export const Contact = () => {
                 value={formData.name}
                 className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white transition focus:outline-none focus:border-cyan-500 focus:bg-cyan-500/5"
                 placeholder="Name..."
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-              />
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
             </div>
 
             <div className="relative">
@@ -62,10 +59,7 @@ export const Contact = () => {
                 value={formData.email}
                 className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white transition focus:outline-none focus:border-cyan-500 focus:bg-cyan-500/5"
                 placeholder="example@gmail.com"
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-              />
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
             </div>
 
             <div className="relative">
@@ -77,10 +71,7 @@ export const Contact = () => {
                 value={formData.message}
                 className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white transition focus:outline-none focus:border-cyan-500 focus:bg-cyan-500/5"
                 placeholder="Your Message..."
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-              />
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })} />
             </div>
 
             <button
@@ -92,8 +83,13 @@ export const Contact = () => {
           </form>
         </div>
 
-        
+
+
+
+
       </RevealOnScroll>
     </section>
+
+    </>
   );
 };
