@@ -116,7 +116,7 @@ export const Projects = () => {
               </div>
               <div className="flex justify-between items-center">
                 <a
-                  href="#"
+                  href="https://github.com/AKBiradar02/OCR_FLASK"
                   className="text-red-150 hover:text-red-300 transition-colors my-4"
                 >
                   View Project →
