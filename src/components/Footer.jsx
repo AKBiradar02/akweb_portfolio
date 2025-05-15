@@ -1,8 +1,6 @@
-import React from "react";
-
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-white py-8 px-4">
+        <footer className="backdrop-blur-sm text-white py-8 px-4 border border-white/10">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
                 <div className="mb-4 md:mb-0">
                     <h2 className="text-xl font-semibold">Abhay Biradar</h2>
@@ -11,7 +9,7 @@ const Footer = () => {
 
                 <div className="flex space-x-6">
                     <a
-                        href="mailto:your.email@example.com"
+                        href="mailto:abhay.biradar@example.com" // Update with real email
                         className="text-gray-400 hover:text-white transition-colors duration-300"
                     >
                         Email
@@ -33,7 +31,7 @@ const Footer = () => {
                         GitHub
                     </a>
                     <a
-                        href="https://affliate-ecom.vercel.app/"
+                        href="https://affiliate-ecom.vercel.app/" // Fixed typo
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-white transition-colors duration-300"
