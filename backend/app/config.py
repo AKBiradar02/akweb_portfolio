@@ -1,6 +1,10 @@
-# backend/config.py
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load from .env file
+
 class Config:
-    SECRET_KEY = 'hardcoded-secret-key'
-    SQLALCHEMY_DATABASE_URI = "postgresql://akuser:PJ7aqcVsXCRn4txujMIF7VM8Yw9ObuYw@dpg-d18mdv8gjchc739ahhq0-a/akwebdb"
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    JWT_SECRET_KEY = 'super-secret-admin-token'
+    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
