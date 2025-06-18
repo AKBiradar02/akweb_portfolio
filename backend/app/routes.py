@@ -1,6 +1,10 @@
-from flask import Blueprint, request, jsonify
+
 from .models import Project
-from . import db
+from extensions import db
+from flask import Blueprint, request, jsonify
+from flask_jwt_extended import create_access_token, jwt_required
+
+
 
 main = Blueprint('main', __name__)
 
