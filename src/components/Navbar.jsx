@@ -14,7 +14,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
 
                     {/* Logo on the Left */}
                     <a href="https://www.instagram.com/fintech__bites__/" className="font-mono text-xl font-bold text-white pl-6">
-                        FinTech__<span className="text-cyan-500">Bytes__</span>
+                        Abhay<span className="text-cyan-500">Biradar</span>
                     </a>
 
                     {/* Centered Navbar Links */}
@@ -27,7 +27,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
 
                     {/* Social Media Icons */}
                     <div className="hidden md:flex items-center space-x-6 pr-6">
-                        <a href="https://www.instagram.com/abhay.kb.02/" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/abhay_kb__02/" target="_blank" rel="noopener noreferrer">
                             <FaInstagram className="text-red-200 hover:text-white text-2xl" />
                         </a>
                         <a href="https://www.linkedin.com/in/abhay-biradar-aa05301b7/" target="_blank" rel="noopener noreferrer">
