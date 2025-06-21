@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const ADMIN_EMAIL = "abhaybiradar02@gmail.com";
 const initialForm = { title: "", description: "", githubLink: "" };
-const API_URL = import.meta.env.VITE_API_URL || "/api";
+const API_URL = `${import.meta.env.VITE_API_URL || "/api"}/projects`; // ✅ updated
 
 export default function AdminPage() {
   const [authState, setAuthState] = useState({ loading: true, user: null });
@@ -199,30 +199,30 @@ export default function AdminPage() {
         </form>
       )}
       {pageState.loading ? <div className="text-center text-lg">Loading projects...</div>
-      : pageState.error ? <div className="text-center text-red-400">{pageState.error}</div>
-      : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-black/60 rounded-xl border border-cyan-500/30 shadow">
-            <thead>
-              <tr>
-                <th className="p-2 border-b text-left">Title</th><th className="p-2 border-b text-left">Description</th><th className="p-2 border-b">GitHub</th><th className="p-2 border-b">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {projects.map((p) => (
-                <tr key={p.id}>
-                  <td className="p-2 border-b">{p.title}</td><td className="p-2 border-b">{p.description}</td>
-                  <td className="p-2 border-b text-center"><a href={p.githubLink} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">View</a></td>
-                  <td className="p-2 border-b flex justify-center gap-2">
-                    <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded" onClick={() => openEditModal(p)}>Edit</button>
-                    <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded" onClick={() => setDeleteId(p.id)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+        : pageState.error ? <div className="text-center text-red-400">{pageState.error}</div>
+          : (
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-black/60 rounded-xl border border-cyan-500/30 shadow">
+                <thead>
+                  <tr>
+                    <th className="p-2 border-b text-left">Title</th><th className="p-2 border-b text-left">Description</th><th className="p-2 border-b">GitHub</th><th className="p-2 border-b">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {projects.map((p) => (
+                    <tr key={p.id}>
+                      <td className="p-2 border-b">{p.title}</td><td className="p-2 border-b">{p.description}</td>
+                      <td className="p-2 border-b text-center"><a href={p.githubLink} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">View</a></td>
+                      <td className="p-2 border-b flex justify-center gap-2">
+                        <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded" onClick={() => openEditModal(p)}>Edit</button>
+                        <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded" onClick={() => setDeleteId(p.id)}>Delete</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
       {editProject && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
           <div className="bg-gray-900 p-8 rounded-xl shadow-lg w-full max-w-lg">
