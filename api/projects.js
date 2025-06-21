@@ -19,8 +19,8 @@ admin.initializeApp({
 const db = admin.firestore();
 
 // Health check endpoint
-app.get('/', (req, res) => {
-  res.send('Backend server is running!');
+app.get('/health', (req, res) => {
+  res.json({status: 'ok', time: new Date().toISOString()})
 });
 
 // Secure endpoint to add a project
