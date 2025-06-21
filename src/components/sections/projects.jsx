@@ -11,7 +11,7 @@ export const Projects = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API_URL}/projects`) // ✅ Correct API path
+    fetch(`${API_URL}`) // ✅ Correct API path
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch");
         return res.json();
