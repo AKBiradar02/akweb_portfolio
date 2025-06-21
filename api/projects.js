@@ -2,13 +2,12 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const admin = require('firebase-admin');
+const { default: serverless } = require('serverless-http');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-
 // Initialize Firebase Admin SDK
 admin.initializeApp({
   credential: admin.credential.cert({
