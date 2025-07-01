@@ -44,7 +44,7 @@ export default function AdminPage() {
   // Fetch projects
   const fetchProjects = useCallback(() => {
     setPageState({ loading: true, error: null });
-    fetch(`${API_URL}/projects`)
+    fetch(`${API_URL}`)
       .then((res) => (res.ok ? res.json() : Promise.reject("Failed to fetch")))
       .then((data) => {
         setProjects(Array.isArray(data) ? data : []);
