@@ -2,9 +2,13 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const admin = require('firebase-admin');
-
-// Vercel serverless handler
 const { default: serverless } = require('serverless-http');
+
+// Debug logging for env vars
+console.log('FIREBASE_PROJECT_ID:', process.env.FIREBASE_PROJECT_ID);
+console.log('FIREBASE_CLIENT_EMAIL:', process.env.FIREBASE_CLIENT_EMAIL);
+console.log('ADMIN_EMAIL:', process.env.ADMIN_EMAIL);
+console.log('FIREBASE_PRIVATE_KEY exists:', !!process.env.FIREBASE_PRIVATE_KEY);
 
 const app = express();
 
@@ -12,7 +16,6 @@ app.use(express.json());
 
 // --- CORS Middleware for All Origins (dev/prod) ---
 app.use((req, res, next) => {
-  // Allow all origins for development. Replace * with your domain for production.
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -23,14 +26,16 @@ app.use((req, res, next) => {
   next();
 });
 
-// Initialize Firebase Admin SDK
-admin.initializeApp({
-  credential: admin.credential.cert({
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-  }),
-});
+// Initialize Firebase Admin SDK only if not already initialized
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    }),
+  });
+}
 const db = admin.firestore();
 
 // Health check endpoint
