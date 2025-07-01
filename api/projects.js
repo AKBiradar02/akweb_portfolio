@@ -6,6 +6,18 @@ const { default: serverless } = require('serverless-http');
 
 const app = express();
 
+// CORS middleware for Vercel serverless
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Or specify your frontend URL for better security
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+  next();
+});
+
 app.use(cors());
 app.use(express.json());
 // Initialize Firebase Admin SDK
