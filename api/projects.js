@@ -67,7 +67,7 @@ app.post('/add-project', async (req, res) => {
 });
 
 // GET endpoint to fetch all projects
-app.get('/projects', async (req, res) => {
+app.get('/', async (req, res) => {
   try {
     const snapshot = await db.collection('projects').orderBy('createdAt', 'desc').get();
     const projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
