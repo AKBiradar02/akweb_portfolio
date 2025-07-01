@@ -8,6 +8,7 @@ import {
   browserLocalPersistence,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+const API_BASE = import.meta.env.VITE_API_URL?.replace(/\/projects$/, '') || "/api";
 
 const ADMIN_EMAIL = "abhaybiradar02@gmail.com";
 const initialForm = { title: "", description: "", githubLink: "" };
@@ -41,9 +42,10 @@ export default function AdminPage() {
     return () => unsubscribe();
   }, []);
 
+  // Fetch projects
   const fetchProjects = useCallback(() => {
     setPageState({ loading: true, error: null });
-    fetch(`${API_URL}`)
+    fetch(`${API_BASE}/projects`)
       .then((res) => (res.ok ? res.json() : Promise.reject("Failed to fetch")))
       .then((data) => {
         setProjects(Array.isArray(data) ? data : []);
@@ -81,9 +83,8 @@ export default function AdminPage() {
     e.preventDefault();
     setAddLoading(true);
     setAddError(null);
-    setAddSuccess(null);
     try {
-      const res = await fetch(`${API_URL}/add-project`, {
+      const res = await fetch(`${API_BASE}/add-project`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...addForm, userEmail: authState.user.email }),
@@ -99,7 +100,6 @@ export default function AdminPage() {
       setAddLoading(false);
     }
   };
-
   const openEditModal = (project) => {
     setEditProject(project);
     setEditForm({ title: project.title, description: project.description, githubLink: project.githubLink });
@@ -113,7 +113,7 @@ export default function AdminPage() {
     setEditLoading(true);
     setEditError(null);
     try {
-      const res = await fetch(`${API_URL}/update-project/${editProject.id}`, {
+      const res = await fetch(`${API_BASE}/update-project/${editProject.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...editForm, userEmail: authState.user.email }),
@@ -128,12 +128,13 @@ export default function AdminPage() {
     }
   };
 
+  // Delete project
   const handleDelete = async () => {
     if (!deleteId) return;
     setDeleteLoading(true);
     setDeleteError(null);
     try {
-      const res = await fetch(`${API_URL}/delete-project/${deleteId}`, {
+      const res = await fetch(`${API_BASE}/delete-project/${deleteId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userEmail: authState.user.email }),
@@ -147,7 +148,6 @@ export default function AdminPage() {
       setDeleteLoading(false);
     }
   };
-
   if (authState.loading) {
     return <div className="flex-grow flex items-center justify-center"><div className="text-2xl">Checking credentials...</div></div>;
   }

@@ -2,13 +2,18 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const admin = require('firebase-admin');
+
+// Vercel serverless handler
 const { default: serverless } = require('serverless-http');
 
 const app = express();
 
-// CORS middleware for Vercel serverless
+app.use(express.json());
+
+// --- CORS Middleware for All Origins (dev/prod) ---
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Or specify your frontend URL for better security
+  // Allow all origins for development. Replace * with your domain for production.
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   if (req.method === 'OPTIONS') {
@@ -18,8 +23,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors());
-app.use(express.json());
 // Initialize Firebase Admin SDK
 admin.initializeApp({
   credential: admin.credential.cert({
@@ -32,7 +35,7 @@ const db = admin.firestore();
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({status: 'ok', time: new Date().toISOString()})
+  res.json({ status: 'ok', time: new Date().toISOString() });
 });
 
 // Secure endpoint to add a project
@@ -53,6 +56,7 @@ app.post('/add-project', async (req, res) => {
     });
     res.status(200).json({ message: 'Project added successfully' });
   } catch (error) {
+    console.error('Add project error:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -64,6 +68,7 @@ app.get('/projects', async (req, res) => {
     const projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     res.status(200).json(projects);
   } catch (error) {
+    console.error('Fetch projects error:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -87,6 +92,7 @@ app.put('/update-project/:id', async (req, res) => {
     });
     res.status(200).json({ message: 'Project updated successfully' });
   } catch (error) {
+    console.error('Update project error:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -102,9 +108,9 @@ app.delete('/delete-project/:id', async (req, res) => {
     await db.collection('projects').doc(id).delete();
     res.status(200).json({ message: 'Project deleted successfully' });
   } catch (error) {
+    console.error('Delete project error:', error);
     res.status(500).json({ error: error.message });
   }
 });
 
-const { default: serverless } = require('serverless-http');
 module.exports = serverless(app);

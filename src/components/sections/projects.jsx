@@ -2,7 +2,7 @@ import { RevealOnScroll } from "../RevealOnScroll";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = `${import.meta.env.VITE_API_URL || "/api"}/projects`; // ✅ Use Vercel or local
+const API_BASE = import.meta.env.VITE_API_URL?.replace(/\/projects$/, '') || "/api";
 
 export const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -11,7 +11,7 @@ export const Projects = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${API_URL}`) // ✅ Correct API path
+    fetch(`${API_BASE}/projects`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch");
         return res.json();
