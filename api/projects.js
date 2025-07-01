@@ -1,20 +1,12 @@
 const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
 const admin = require('firebase-admin');
 const { default: serverless } = require('serverless-http');
-
-// Debug logging for env vars
-console.log('FIREBASE_PROJECT_ID:', process.env.FIREBASE_PROJECT_ID);
-console.log('FIREBASE_CLIENT_EMAIL:', process.env.FIREBASE_CLIENT_EMAIL);
-console.log('ADMIN_EMAIL:', process.env.ADMIN_EMAIL);
-console.log('FIREBASE_PRIVATE_KEY exists:', !!process.env.FIREBASE_PRIVATE_KEY);
+require('dotenv').config();
 
 const app = express();
-
 app.use(express.json());
 
-// --- CORS Middleware for All Origins (dev/prod) ---
+// CORS Middleware
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -26,7 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Initialize Firebase Admin SDK only if not already initialized
+// Initialize Firebase admin if not already initialized
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert({
@@ -38,12 +30,19 @@ if (!admin.apps.length) {
 }
 const db = admin.firestore();
 
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', time: new Date().toISOString() });
+// GET ALL PROJECTS -- THIS IS THE MAIN ROUTE!
+app.get('/', async (req, res) => {
+  try {
+    const snapshot = await db.collection('projects').orderBy('createdAt', 'desc').get();
+    const projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    res.status(200).json(projects);
+  } catch (error) {
+    console.error('Fetch projects error:', error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
-// Secure endpoint to add a project
+// Add project
 app.post('/add-project', async (req, res) => {
   const { title, description, githubLink, userEmail } = req.body;
   if (userEmail !== process.env.ADMIN_EMAIL) {
@@ -62,18 +61,6 @@ app.post('/add-project', async (req, res) => {
     res.status(200).json({ message: 'Project added successfully' });
   } catch (error) {
     console.error('Add project error:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// GET endpoint to fetch all projects
-app.get('/', async (req, res) => {
-  try {
-    const snapshot = await db.collection('projects').orderBy('createdAt', 'desc').get();
-    const projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    res.status(200).json(projects);
-  } catch (error) {
-    console.error('Fetch projects error:', error);
     res.status(500).json({ error: error.message });
   }
 });
