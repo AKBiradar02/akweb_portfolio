@@ -1,108 +1,115 @@
 const express = require('express');
 const admin = require('firebase-admin');
-const { default: serverless } = require('serverless-http');
-require('dotenv').config();
+const cors = require('cors');
+const path = require('path');
 
 const app = express();
-app.use(express.json());
 
-// CORS Middleware
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-  next();
-});
+// Serve static files from the dist directory
+app.use(express.static(path.join(__dirname, '..', 'dist')));
 
-// Initialize Firebase admin if not already initialized
+// Initialize Firebase Admin
 if (!admin.apps.length) {
+  const serviceAccount = require('./akweb-portfolio-firebase-adminsdk-fbsvc-70418cdd02.json');
+  
   admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-    }),
+    credential: admin.credential.cert(serviceAccount),
+    projectId: 'akweb-portfolio'
   });
 }
+
 const db = admin.firestore();
 
-// GET ALL PROJECTS -- THIS IS THE MAIN ROUTE!
-app.get('/', async (req, res) => {
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  credentials: true
+}));
+app.use(express.json());
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', message: 'API is running' });
+});
+
+// Get all projects
+app.get('/api/projects', async (req, res) => {
   try {
-    const snapshot = await db.collection('projects').orderBy('createdAt', 'desc').get();
-    const projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    res.status(200).json(projects);
+    const snapshot = await db.collection('projects').get();
+    const projects = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    res.json(projects);
   } catch (error) {
-    console.error('Fetch projects error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Error fetching projects:', error);
+    res.status(500).json({ error: 'Failed to fetch projects' });
   }
 });
 
-// Add project
-app.post('/add-project', async (req, res) => {
-  const { title, description, githubLink, userEmail } = req.body;
-  if (userEmail !== process.env.ADMIN_EMAIL) {
-    return res.status(403).json({ error: 'Unauthorized' });
-  }
-  if (!title || !description || !githubLink) {
-    return res.status(400).json({ error: 'Missing fields' });
-  }
+// Add new project
+app.post('/api/add-project', async (req, res) => {
   try {
-    await db.collection('projects').add({
+    const { title, description, githubLink, userEmail } = req.body;
+
+    if (!title || !description || !githubLink || !userEmail) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const docRef = await db.collection('projects').add({
       title,
       description,
       githubLink,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      userEmail,
+      createdAt: admin.firestore.FieldValue.serverTimestamp()
     });
-    res.status(200).json({ message: 'Project added successfully' });
+
+    res.json({ id: docRef.id, message: 'Project added successfully' });
   } catch (error) {
-    console.error('Add project error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Error adding project:', error);
+    res.status(500).json({ error: 'Failed to add project' });
   }
 });
 
 // Update project
-app.put('/update-project/:id', async (req, res) => {
-  const { id } = req.params;
-  const { title, description, githubLink, userEmail } = req.body;
-  if (userEmail !== process.env.ADMIN_EMAIL) {
-    return res.status(403).json({ error: 'Unauthorized' });
-  }
-  if (!title || !description || !githubLink) {
-    return res.status(400).json({ error: 'Missing fields' });
-  }
+app.put('/api/update-project/:id', async (req, res) => {
   try {
+    const { id } = req.params;
+    const { title, description, githubLink, userEmail } = req.body;
+
     await db.collection('projects').doc(id).update({
       title,
       description,
       githubLink,
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp()
     });
-    res.status(200).json({ message: 'Project updated successfully' });
+
+    res.json({ message: 'Project updated successfully' });
   } catch (error) {
-    console.error('Update project error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Error updating project:', error);
+    res.status(500).json({ error: 'Failed to update project' });
   }
 });
 
 // Delete project
-app.delete('/delete-project/:id', async (req, res) => {
-  const { id } = req.params;
-  const { userEmail } = req.body;
-  if (userEmail !== process.env.ADMIN_EMAIL) {
-    return res.status(403).json({ error: 'Unauthorized' });
-  }
+app.delete('/api/delete-project/:id', async (req, res) => {
   try {
+    const { id } = req.params;
     await db.collection('projects').doc(id).delete();
-    res.status(200).json({ message: 'Project deleted successfully' });
+    res.json({ message: 'Project deleted successfully' });
   } catch (error) {
-    console.error('Delete project error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Error deleting project:', error);
+    res.status(500).json({ error: 'Failed to delete project' });
   }
 });
 
-module.exports = serverless(app);
+// Catch-all handler: send back React's index.html file for any non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+module.exports = app;
