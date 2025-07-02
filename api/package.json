@@ -1,0 +1,18 @@
+{
+    "name": "portfolio-api",
+    "version": "1.0.0",
+    "description": "API for portfolio project management",
+    "main": "projects.js",
+    "scripts": {
+        "start": "node projects.js",
+        "dev": "nodemon projects.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "firebase-admin": "^11.11.0",
+        "cors": "^2.8.5"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}
