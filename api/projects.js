@@ -8,13 +8,15 @@ const app = express();
 // Serve static files from the dist directory
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
-// Initialize Firebase Admin
+// Initialize Firebase Admin using environment variables
 if (!admin.apps.length) {
-  const serviceAccount = require('./akweb-portfolio-firebase-adminsdk-fbsvc-70418cdd02.json');
-  
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    projectId: 'akweb-portfolio'
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL
+    }),
+    projectId: process.env.FIREBASE_PROJECT_ID
   });
 }
 
@@ -25,6 +27,20 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+
+// WARNING: This API currently has no authentication. For production, implement proper authentication and authorization!
+// Add a simple API key check middleware
+const API_KEY = process.env.API_KEY || 'changeme';
+app.use((req, res, next) => {
+  // Only protect write operations
+  if (["POST", "PUT", "DELETE"].includes(req.method) && req.path.startsWith("/api/")) {
+    const clientKey = req.headers['x-api-key'];
+    if (clientKey !== API_KEY) {
+      return res.status(401).json({ error: 'Unauthorized: Invalid API Key' });
+    }
+  }
+  next();
+});
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
