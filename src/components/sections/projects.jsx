@@ -2,7 +2,7 @@ import { RevealOnScroll } from "../RevealOnScroll";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://your-api-url.com/api';
 
 export const Projects = () => {
   const [projects, setProjects] = useState([]);

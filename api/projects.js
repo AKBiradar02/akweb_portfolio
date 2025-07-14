@@ -23,7 +23,7 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: ['http://localhost:5173', 'http://localhost:3000', 'https://akweb-portfolio.web.app', 'https://akweb-portfolio.firebaseapp.com'],
   credentials: true
 }));
 app.use(express.json());

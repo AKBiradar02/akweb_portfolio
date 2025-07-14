@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const ADMIN_EMAIL = "abhaybiradar02@gmail.com";
 const initialForm = { title: "", description: "", githubLink: "" };
-const API_URL = import.meta.env.VITE_API_URL; // ✅ updated
+const API_URL = import.meta.env.VITE_API_URL || 'https://your-api-url.com/api';
 
 export default function AdminPage() {
   const [authState, setAuthState] = useState({ loading: true, user: null });
@@ -257,4 +257,4 @@ export default function AdminPage() {
       )}
     </div>
   );
-} 
+}
